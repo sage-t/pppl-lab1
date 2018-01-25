@@ -114,11 +114,27 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
       case Node(Empty, d, r) => (r, d)
       case Node(l, d, r) =>
         val (l1, m) = deleteMin(l)
-        ???
+        (Node(l1, d, r), m)
     }
   }
 
-  def delete(t: SearchTree, n: Int): SearchTree = ???
+  def delete(t: SearchTree, n: Int): SearchTree = t match {
+    case Empty => Empty
+    case Node(Empty, d, Empty) => if (d == n) Empty else t
+    case Node(l, d, Empty) =>
+      if (d > n) Node(delete(l, n), d, Empty) else if (d == n) l  else t
+    case Node(Empty, d, r) =>
+      if (d < n) Node(Empty, d, delete(r, n)) else if (d == n) r else t
+    case Node(l, d, r) =>
+      if (d < n) {
+        Node(l, d, delete(r, n))
+      } else if (d > n) {
+        Node(delete(l, n), d, r)
+      } else {
+        val (r0, d0) = deleteMin(r)
+        Node(l, d0, r0)
+      }
+  }
 
   /* JavaScripty */
 
