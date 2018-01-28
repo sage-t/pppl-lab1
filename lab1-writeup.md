@@ -2,7 +2,6 @@
 * Sage Thomas
 
 ## Questions
-1. TODO
 
 2. 
 ```
